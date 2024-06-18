@@ -1,0 +1,5 @@
+node_modules/
+dist/
+
+# Ignore package-lock.json in backend directory
+package-lock.json
