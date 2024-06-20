@@ -20,15 +20,14 @@ export const routes: Routes = [
         path: '',
         component: LayoutComponent,
         children: [
-            // {
-            //     path: 'home',
-            //     loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
-            //     data: {
-            //         // roles: ['TENANT_ADMIN', 'STUDENT', 'PARENT', 'PARENT_ADMISSION', 'FACULTY'],
-            //         resource: EntityConstants.SYS_ADMIN_RSRC
-            //     },
-            //     canActivate: [UserRouteAccessService]
-            // },
+            {
+                path: 'dashboard',
+                loadChildren: () => import('./shared/dashboard/dashboard.module').then(m => m.DashboardModule),
+                data: {
+                    // roles: ['TENANT_ADMIN', 'STUDENT', 'PARENT', 'FACULTY'],
+                },
+                // canActivate: [UserRouteAccessService]
+            },
         ]
 
     },

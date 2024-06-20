@@ -1,1 +1,43 @@
-<p>login works!</p>
+<div class="flex flex-col items-center pt-8 w-full h-full">
+
+    <form [formGroup]="loginForm" (ngSubmit)="login()" class="flex flex-col gap-1 w-1/3 loginform">
+        <div>
+            <h6 class="text-center">Login Here</h6>
+            <span>Sign in with your credentials below.</span>
+        </div>
+        <div class="flex flex-row w-full">
+            <mat-form-field class="w-full">
+                <mat-label>Enter your email</mat-label>
+                <input matInput placeholder="pat@example.com" formControlName="email" required />
+                <mat-error *ngIf="loginForm.get('email').hasError('required') || loginForm.get('email').pristine">Please
+                    enter
+                    valid email.</mat-error>
+            </mat-form-field>
+
+        </div>
+        <div class="flex flex-row w-full">
+            <mat-form-field class="w-full">
+                <mat-label>Enter your password</mat-label>
+                <input formControlName="password" matInput [type]="hide() ? 'password' : 'text'" required />
+                <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide()">
+                    <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-hint>Click the eye to toggle visibility.</mat-hint>
+                <mat-error
+                    *ngIf="loginForm.get('password').hasError('required') || loginForm.get('password').pristine">Please
+                    enter
+                    valid password.</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="flex flex-row justify-between">
+            <mat-checkbox class="example-margin">Checked</mat-checkbox>
+            <a href="" class="underline">Forgot Password?</a>
+        </div>
+        <button [disabled]="!loginForm.valid" mat-flat-button type="submit">Login</button>
+        <div class="flex flex-row justify-between">
+            <p>Don't have an account?</p>
+            <a routerLink="/register" class="underline">Register</a>
+        </div>
+    </form>
+</div>

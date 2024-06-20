@@ -1,0 +1,1 @@
+export const SERVICE_API_URL = 'https://stgebs.mapmyclassess.com/';
