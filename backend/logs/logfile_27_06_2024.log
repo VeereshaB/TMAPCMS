@@ -1,6 +1,0 @@
-5:04:03 AM | Info | 'Connected to the database' | 
-5:04:03 AM | Info | 'Schema created successfully:' | Service: [object Object] | 
-5:04:03 AM | Info | 'Sequelize: Connection has been established successfully.' | 
-5:04:05 AM | Info | 'Liquibase: Pending changesets:' | Service: root@localhost@jdbc:mysql://localhost:3306/pms is up to date
- | 
-5:04:07 AM | Info | 'Liquibase: Update successful' | 
