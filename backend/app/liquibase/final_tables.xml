@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="organization_tables" author="veeresh">
+        <createTable tableName="organization">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="organization_name" type="varchar(250)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="branch_name" type="varchar(250)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_main_branch" type="tinyint(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="varchar(100)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="phone" type="varchar(15)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="address" type="varchar(500)"/>
+            <column name="state" type="varchar(100)"/>
+            <column name="city" type="varchar(100)"/>
+            <column name="zip" type="varchar(100)"/>
+            <column name="country" type="varchar(100)"/>
+            <column name="activated" type="tinyint(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="subscribed" type="tinyint(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="subscription_id" type="bigint"/>
+            <column name="subscription_start_date" type="timestamp"/>
+            <column name="subscription_end_date" type="timestamp"/>
+            <column name="docs_verified" type="tinyint(1)"/>
+            <column name="documents_location" type="text"/>
+            <column name="web_url" type="text"/>
+            <column name="created_by" type="varchar(100)"/>
+            <column name="created_date" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_by" type="varchar(100)"/>
+            <column name="last_modified_date" type="timestamp"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="user_tables" author="veeresh">
+        <createTable tableName="user">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_name" type="varchar(100)">
+                <constraints unique="true" nullable="false" uniqueConstraintName="ux_username"/>
+            </column>
+            <column name="password" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="organization_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="salutation" type="varchar(20)"/>
+            <column name="first_name" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="middle_name" type="varchar(50)"/>
+            <column name="last_name" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="tinyint(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password_change_required" type="tinyint(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="image" type="text"/>
+            <column name="last_loggedin_date" type="timestamp"/>
+            <column name="drop_out" type="tinyint(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="timestamp"/>
+            <column name="last_modified_by" type="varchar(100)"/>
+            <column name="last_modified_date" type="timestamp"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="user"
+                             baseColumnNames="organization_id"
+                             constraintName="fk_user_organization"
+                             referencedTableName="organization"
+                             referencedColumnNames="id"
+                             onDelete="CASCADE"/>
+    </changeSet>
+
+    <changeSet id="role_tables" author="veeresh">
+        <createTable tableName="role">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="user_roles" author="veeresh">
+        <createTable tableName="user_role">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="user_role"
+                                 constraintName="fk_user-role_user"
+                                 onDelete="CASCADE"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user"/>
+
+        <addForeignKeyConstraint baseColumnNames="role_id"
+                                 baseTableName="user_role"
+                                 constraintName="fk_user-role_role"
+                                 referencedColumnNames="id"
+                                 referencedTableName="role"/>
+    </changeSet>
+
+</databaseChangeLog>

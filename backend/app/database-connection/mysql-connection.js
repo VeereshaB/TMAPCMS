@@ -30,6 +30,7 @@ async function setupDatabaseAndMigrations() {
                     log.Error('Error connecting to the database', err); // Logging error
                     reject(err);
                 } else {
+                    require('../../app/liquibase/data/defaultAddUserMapping');
                     log.Info('Connected to the database'); // Logging info
                     resolve();
                 }
@@ -38,7 +39,7 @@ async function setupDatabaseAndMigrations() {
 
         // Create the schema if it doesn't exist
         await new Promise((resolve, reject) => {
-            db.query('CREATE SCHEMA IF NOT EXISTS `pms`', (err, results) => {
+            db.query('CREATE SCHEMA IF NOT EXISTS `project_management_system`', (err, results) => {
                 if (err) {
                     log.Error('Error creating schema', err); // Logging error
                     reject(err);
@@ -56,7 +57,7 @@ async function setupDatabaseAndMigrations() {
         // Liquibase configuration
         const liquibaseConfig = {
             changeLogFile: 'app/liquibase/master.xml',
-            url: 'jdbc:mysql://localhost:3306/pms',
+            url: 'jdbc:mysql://localhost:3306/project_management_system',
             username: process.env.MYSQL_USE_NAME,
             password: process.env.MYSQL_PWD,
             classpath: 'app/database-connection/mysql-connector-java-8.0.17.jar',

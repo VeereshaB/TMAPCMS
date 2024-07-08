@@ -5,33 +5,6 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
-<changeSet id="user_table" author="satya">
-        <createTable tableName="user">
-            <column name="id" type="int" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="name" type="varchar(50)">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-
-     <changeSet id="role_table" author="satya">
-        <createTable tableName="role">
-            <column name="id" type="int" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="name" type="varchar(50)">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet id="add_col_dept" author="satya">
-      <addColumn tableName="user">
-             <column name="dept" type="varchar(10)">
- 				<constraints nullable="false"/>
-             </column>
-        </addColumn>
-    </changeSet>
-
+<include file="/app/liquibase/final_tables.xml"
+		relativeToChangelogFile="false" />
 </databaseChangeLog>

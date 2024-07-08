@@ -6,7 +6,7 @@ var cookieParser = require("cookie-parser");
 var cors = require("cors");
 var morgan = require("morgan");
 const log = require('./app/database-connection/logfile');
-
+var colors = require('colors');
 const dotenv = require("dotenv");
 dotenv.config(); 
 
@@ -80,7 +80,6 @@ app.use("/api", appRouter);
 app.use(function(_req, _res, next) {
     next(createError(404));
 });
-
 // error handler
 app.use(function(err, req, res, _next) {
     // set locals, only providing error in development
