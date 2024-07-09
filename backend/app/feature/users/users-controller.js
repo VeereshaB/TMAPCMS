@@ -1,7 +1,9 @@
+// users-router.js
 const express = require("express");
 const router = express.Router();
-router.get("/", (req, res, next) => {
-    res.send("Welcome to the notification setting route Users!");
-  });
-// Export the router
+const authMiddleware = require('../../authentication/jwt-authMiddleware'); // Adjust path as necessary
+const Users = require('./user-implementaion'); // Adjust path as necessary
+// authMiddleware.authMiddleware,
+router.post("/create", Users.createUpdate);
+
 module.exports = router;
