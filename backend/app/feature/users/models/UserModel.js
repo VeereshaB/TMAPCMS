@@ -1,18 +1,19 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../../../database-connection/mysql-connection');
-const auditingEntity = require('../../models/AuditingEntity');
-const Organization = require('./OrganizationModel')
+const auditingEntity = require('../../models/AuditingEntity'); // Adjust path as needed
+const Organization = require('./OrganizationModel');
+
 const User = sequelize.define('User', {
     ...auditingEntity,
     userName: {
         type: DataTypes.STRING,
-        required: true,
+        allowNull: false,
         trim: true,
         field: 'user_name'
     },
     password: {
         type: DataTypes.STRING,
-        required: true,
+        allowNull: false,
         trim: true,
     },
     organizationId: {
@@ -26,59 +27,69 @@ const User = sequelize.define('User', {
     },
     salutation: {
         type: DataTypes.STRING,
-        require: true,
+        allowNull: true,
         trim: true,
         field: 'salutation'
     },
     firstName: {
         type: DataTypes.STRING,
-        require: true,
+        allowNull: false,
         trim: true,
         field: 'first_name'
     },
     middleName: {
         type: DataTypes.STRING,
-        require: true,
+        allowNull: true,
         trim: true,
         field: 'middle_name'
     },
     lastName: {
         type: DataTypes.STRING,
-        require: true,
+        allowNull: false,
         trim: true,
         field: 'last_name'
     },
     status: {
         type: DataTypes.BOOLEAN,
-        require: true,
+        allowNull: false,
         defaultValue: false,
         trim: true,
         field: 'status'
     },
-    passordChangeRequired: {
+    passwordChangeRequired: {
         type: DataTypes.BOOLEAN,
+        allowNull: false,
         defaultValue: false,
         field: 'password_change_required'
     },
     image: {
         type: DataTypes.STRING,
-        require: false,
+        allowNull: true,
         trim: true,
         field: 'image'
     },
-    lastLoggedinDate: {
+    lastLoggedInDate: {
         type: DataTypes.DATE,
+        allowNull: true,
         defaultValue: DataTypes.NOW,
         field: 'last_loggedin_date'
     },
     isArchived: {
         type: DataTypes.BOOLEAN,
+        allowNull: false,
         defaultValue: false,
         field: 'drop_out'
     },
+    roles: {
+        type: DataTypes.VIRTUAL
+    },
+    organizations: {
+        type: DataTypes.VIRTUAL
+    }
 }, {
     tableName: 'user',
     timestamps: false
 });
 
+User.belongsTo(Organization, { foreignKey: 'organizationId', as: 'organization' });
 module.exports = User;

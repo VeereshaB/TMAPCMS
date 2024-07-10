@@ -1,39 +1,38 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../../../database-connection/mysql-connection');
-const Role=require('./roles.model');
-const User=require('../../users/models/UserModel')
+const User = require('../../users/models/UserModel');
+const Role = require('../../roles/models/roles.model');
 
-const UserRole = sequelize.define('UserRole', {
-  id: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true
-  },
-  userId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    field: 'user_id',
-    references: {
-      model: User,
-      key: 'id'
+const UserRole = sequelize.define('user_role', {
+    id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true
+    },
+    userId: {
+        type: DataTypes.BIGINT,
+        allowNull: false,
+        field: 'user_id',
+        references: {
+            model: User,
+            key: 'id'
+        }
+    },
+    roleId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        field: 'role_id',
+        references: {
+            model: Role,
+            key: 'id'
+        }
     }
-  },
-  roleId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    field: 'role_id',
-    references: {
-      model: Role,
-      key: 'id'
-    }
-  }
 }, {
-  tableName: 'user_role',
-  timestamps: false
+    tableName: 'user_role',
+    timestamps: false
 });
 
-// Define associations explicitly
-UserRole.belongsTo(User, { foreignKey: 'user_id' });
-UserRole.belongsTo(Role, { foreignKey: 'role_id' });
+UserRole.belongsTo(User, { foreignKey: 'userId' });
+UserRole.belongsTo(Role, { foreignKey: 'roleId' });
 
 module.exports = UserRole;
