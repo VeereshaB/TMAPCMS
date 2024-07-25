@@ -56,7 +56,7 @@ async function setupDatabaseAndMigrations() {
 
         // Liquibase configuration
         const liquibaseConfig = {
-            changeLogFile: 'app/liquibase/master.xml',
+            changeLogFile: '../liquibase/master.xml',
             url: 'jdbc:mysql://localhost:3306/project_management_system',
             username: process.env.MYSQL_USE_NAME,
             password: process.env.MYSQL_PWD,
@@ -89,6 +89,7 @@ async function setupDatabaseAndMigrations() {
 
 // Execute setup function
 setupDatabaseAndMigrations();
+// sequelize.sync() /* using this line we can create table sequalizer throw */
 
 // Export the Sequelize instance for use in other modules
 module.exports = { setupDatabaseAndMigrations, sequelize };
