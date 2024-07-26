@@ -56,7 +56,7 @@ async function setupDatabaseAndMigrations() {
 
         // Liquibase configuration
         const liquibaseConfig = {
-            changeLogFile: '../liquibase/master.xml',
+            changeLogFile: 'app/liquibase/master.xml',
             url: 'jdbc:mysql://localhost:3306/project_management_system',
             username: process.env.MYSQL_USE_NAME,
             password: process.env.MYSQL_PWD,

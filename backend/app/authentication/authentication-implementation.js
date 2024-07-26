@@ -10,6 +10,7 @@ const accessTokenExpirationMs = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 const login = async (req, res) => {
     try {
         const { userName, password } = req.body;
+        console.log("@@REQ"+JSON.stringify(req.body));
         log.Info("@@@userName " + userName)
         log.Info("#####password " + password);
 

@@ -75,7 +75,10 @@ app.use((req, res, next) => {
 
 /* Router components */
 app.use("/api", appRouter);
-
+/* Automation testing */
+// app.get('/run', (req, res) => {
+//     require('./app/feature/automation/app/school-stg');
+// })
 // catch 404 and forward to error handler
 app.use(function(_req, _res, next) {
     next(createError(404));

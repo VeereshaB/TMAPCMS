@@ -1,30 +1,29 @@
 
 var express = require("express");
 var router = express.Router();
-const Roles = require("./roles-implemention");
+const projectIMpl = require("./project_implimentation");
 // const {authMiddleware}=require('../app/src/auth/authMiddleware')
-/* GET Roles listing. */
 
-router.post("/", Roles.list);
-router.get("/all", Roles.listAll);
+router.post("/", projectIMpl.list);
+router.get("/all", projectIMpl.listAll);
 /**
- * Get a roles details
+ * Get a projectIMpl details
  */
-router.get("/:id", Roles.detail);
+router.get("/:id", projectIMpl.detail);
 // Add new role
 router.post(
   "/create",
-  Roles.add
+  projectIMpl.add
 );
 // Update a role
 router.post(
   "/update/:id",
-  Roles.update
+  projectIMpl.update
 );
 // Delete a user
 router.delete(
   "/:id",
-  Roles.del
+  projectIMpl.del
 );
 module.exports = router;
 

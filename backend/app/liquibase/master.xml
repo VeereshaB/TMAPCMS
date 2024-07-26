@@ -7,4 +7,8 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 <include file="/app/liquibase/final_tables.xml"
 		relativeToChangelogFile="false" />
+<include file="/app/liquibase/project_table.xml"
+		relativeToChangelogFile="false" />
+<include file="/app/liquibase/employee_table.xml"
+		relativeToChangelogFile="false" />
 </databaseChangeLog>

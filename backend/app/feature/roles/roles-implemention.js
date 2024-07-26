@@ -1,5 +1,5 @@
-const RoleModel = require('./models/roles.model');
 const { paginate } = require('../../helpers/pagination');
+const RoleModel = require('./models/roles.model');
 const RequestHelper = require('../../helpers/requestValidatorHelper');
 const list = async (req, res) => {
     console.log("@@@@@@req.body" + JSON.stringify(req.body));
